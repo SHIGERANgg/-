@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль, с которыми мы работаем — ООО "Альбали Стар"</title>
+    <!-- Шрифт Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Иконки FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- ОБЩИЕ СТИЛИ (как на главной) --- */
+        :root {
+            --color-bg: #ffffff;
+            --color-text: #222222;
+            --color-text-light: #666666;
+            --color-border: #eeeeee;
+            --color-block-bg: #f8f8f8;
+            --font-main: 'Montserrat', sans-serif;
+            --container-width: 1200px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-top: 70px;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 { font-weight: 600; line-height: 1.3; }
+
+        /* --- ЧЕРНАЯ НАВИГАЦИОННАЯ ПАНЕЛЬ --- */
+        .top-navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: #000000; height: 70px;
+            display: flex; align-items: center; z-index: 1000;
+        }
+
+        .top-navbar .container {
+            display: flex; justify-content: space-between;
+            align-items: center; width: 100%;
+        }
+
+        .top-navbar .nav-links { display: flex; gap: 35px; }
+
+        .top-navbar .nav-links a {
+            color: #ffffff; font-size: 14px; font-weight: 500;
+            letter-spacing: 0.3px; transition: opacity 0.3s;
+        }
+
+        .top-navbar .nav-links a:hover { opacity: 0.7; }
+
+        .top-navbar .social-icons { display: flex; gap: 12px; }
+
+        .top-navbar .social-icons a {
+            display: flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; background-color: #ffffff;
+            border-radius: 50%; color: #000000; font-size: 16px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .top-navbar .social-icons a:hover { transform: scale(1.1); background-color: #f0f0f0; }
+
+        /* --- БУРГЕР-МЕНЮ --- */
+        .mobile-menu-btn {
+            display: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* --- ЗАГОЛОВОК СТРАНИЦЫ --- */
+        .page-header {
+            padding: 80px 0 60px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .page-header h1 { font-size: 40px; margin-bottom: 20px; font-weight: 300; letter-spacing: 1px; }
+        .page-header p { font-size: 18px; color: var(--color-text-light); max-width: 800px; margin: 0 auto; }
+
+        /* --- СЕТКА ПРОФИЛЕЙ --- */
+        .profiles-section { padding: 80px 0; }
+        
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .profile-card {
+            background: #fff;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.3s, transform 0.3s;
+            position: relative;
+        }
+
+        .profile-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transform: translateY(-5px);
+        }
+
+        .profile-card h3 { 
+            font-size: 24px; 
+            margin-bottom: 15px; 
+            color: #000; 
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .profile-segment {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #555;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            align-self: flex-start;
+        }
+
+        /* Блоки Плюсы/Минусы/Назначение */
+        .pros-cons-block {
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .pros-cons-block h4 {
+            font-size: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pros-cons-block ul { padding-left: 0; }
+        
+        .pros-cons-block li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            color: #444;
+        }
+
+        .pros-cons-block li i { margin-top: 4px; font-size: 12px; }
+
+        .list-plus h4 { color: #27ae60; }
+        .list-plus li i { color: #27ae60; }
+
+        .list-minus h4 { color: #e74c3c; }
+        .list-minus li i { color: #e74c3c; }
+
+        .list-purpose h4 { color: #2980b9; }
+        .list-purpose p { color: #444; line-height: 1.5; }
+
+        .btn-consult {
+            display: block;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-top: auto;
+        }
+
+        .btn-consult:hover { background-color: #333; }
+
+        /* --- ФУТЕР --- */
+        footer {
+            padding: 40px 0;
+            background-color: #1a1c1f;
+            color: #666;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* --- АДАПТИВ --- */
+        @media (max-width: 992px) {
+            .mobile-menu-btn { display: block; }
+
+            .top-navbar .nav-links {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background-color: #000000;
+                padding: 20px 0;
+                gap: 20px;
+                text-align: center;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            }
+
+            .top-navbar .nav-links.active {
+                left: 0;
+            }
+
+            .top-navbar .nav-links li { padding: 10px 0; }
+
+            .profiles-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 32px; }
+        }
+
+        /* --- СТИЛЬ ДЛЯ ПЕРЕХОДА (РАЗДЕЛИТЕЛЯ) --- */
+        .section-divider {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 0 20px;
+            margin-top: 20px;
+            border-top: 1px solid var(--color-border);
+        }
+        .section-divider h2 {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .section-divider p {
+            font-size: 16px;
+            color: var(--color-text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ЧЕРНАЯ ПАНЕЛЬ СВЕРХУ -->
+    <nav class="top-navbar">
+        <div class="container">
+            <!-- Кнопка бургер-меню для телефонов -->
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Главная</a></li>
+<li><a href="index.html#services">Услуги</a></li>
+                <li><a href="profiles.html" style="text-decoration: underline; opacity: 1;">Профиль</a></li>
+                <li><a href="balcony.html">Обшивка балконов</a></li> 
+                <li><a href="index.html#contacts">Контакты</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="https://t.me/albalistar" target="_blank" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                <a href="viber://chat?number=%2B375293666266" target="_blank" title="Viber"><i class="fab fa-viber"></i></a>
+                <a href="https://wa.me/375293666266" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ЗАГОЛОВОК -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Профиль, с которыми мы работаем</h1>
+            <p>Мы не привязаны к одному заводу. Выбираем оптимальное решение под ваш бюджет, климат и требования к тепло- и шумоизоляции. Ниже — честный разбор популярных систем.</p>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ ПРОФИЛЕЙ -->
+    <section class="profiles-section">
+        <div class="container">
+            <div class="profiles-grid">
+                
+                <!-- ================= ДОБАВЛЕННЫЙ ПЕРЕХОД (ОКНА) ================= -->
+                <div class="section-divider" id="windows">
+                    <h2>Оконные системы</h2>
+                    <p>Современные профили для квартир и частных домов. Отличная защита от холода, шума и пыли. Выберем оптимальный вариант под ваш бюджет.</p>
+                </div>
+
+                <!-- ================= ОКОННЫЕ ПРОФИЛИ ================= -->
+
+                <!-- 1. ГРЮНХАУС -->
+                <div class="profile-card">
+                    <h3>Greenhouse (Грюнхаус)</h3>
+                    <span class="profile-segment" style="background: #e8f4fc; color: #2980b9;">58 мм / 70 мм — Бюджет и Стандарт</span>
+                    
+                    <div class="pros-cons-block list-plus">
+                        <h4><i class="fas fa-plus-circle"></i> Плюсы:</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Отличное соотношение цены и качества.</li>
+                            <li><i class="fas fa-check"></i> 58 мм — надежная база для дач и балконов.</li>
+                            <li><i class="fas fa-check"></i> 70 мм — уже полноценный теплый профиль для квартир.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-minus">
+                        <h4><i class="fas fa-minus-circle"></i> Минусы:</h4>
+                        <ul>
+                            <li><i class="fas fa-times"></i> 58 мм не подходит для суровых зим без доп. утепления.</li>
+                            <li><i class="fas fa-times"></i> Требует качественной фурнитуры для долгой службы.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-purpose">
+                        <h4><i class="fas fa-bullseye"></i> Назначение:</h4>
+                        <p><b>58 мм:</b> балконы, лоджии, дачи, нежилые помещения.<br>
+                        <b>70 мм:</b> стандартные городские квартиры, спальни, детские.</p>
+                    </div>
+                   <a href="index.html#contacts" class="btn-consult">Сделать заказ</a>
+                </div>
+
+                <!-- 2. VEKA -->
+                <div class="profile-card">
+                    <h3>VEKA (Века)</h3>
+                    <span class="profile-segment" style="background: #e8f4fc; color: #2980b9;">70 мм / 76 мм — Стандарт и Премиум</span>
+                    
+                    <div class="pros-cons-block list-plus">
+                        <h4><i class="fas fa-plus-circle"></i> Плюсы:</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Мировой бренд, эталон качества и экологичности.</li>
+                            <li><i class="fas fa-check"></i> Идеальная геометрия и долговечность (служит 40+ лет).</li>
+                            <li><i class="fas fa-check"></i> 76 мм — отличная шумоизоляция и защита от холода.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-minus">
+                        <h4><i class="fas fa-minus-circle"></i> Минусы:</h4>
+                        <ul>
+                            <li><i class="fas fa-times"></i> Дороже бюджетных аналогов.</li>
+                            <li><i class="fas fa-times"></i> На рынке много подделок, важно покупать у офиц. дилеров (как мы).</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-purpose">
+                        <h4><i class="fas fa-bullseye"></i> Назначение:</h4>
+                        <p><b>70 мм:</b> универсал для любых квартир, отличный баланс цены.<br>
+                        <b>76 мм:</b> коттеджи, дома у дорог, панорамное остекление, детские комнаты.</p>
+                    </div>
+                   <a href="index.html#contacts" class="btn-consult">Сделать заказ</a>
+                </div>
+
+                <!-- 3. КЕМЕРЛИНГ -->
+                <div class="profile-card">
+                    <h3>Kömmerling (Кемерлинг)</h3>
+                    <span class="profile-segment" style="background: #fdf0e1; color: #d35400;">70 мм / 76 мм — Стандарт и Премиум</span>
+                    
+                    <div class="pros-cons-block list-plus">
+                        <h4><i class="fas fa-plus-circle"></i> Плюсы:</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Немецкое качество, один из лидеров рынка.</li>
+                            <li><i class="fas fa-check"></i> Отличная теплоизоляция благодаря многокамерности.</li>
+                            <li><i class="fas fa-check"></i> Элегантный внешний вид, идеально белый цвет.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-minus">
+                        <h4><i class="fas fa-minus-circle"></i> Минусы:</h4>
+                        <ul>
+                            <li><i class="fas fa-times"></i> Высокая стоимость (особенно серия 76).</li>
+                            <li><i class="fas fa-times"></i> Сроки изготовления могут быть дольше из-за логистики.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-purpose">
+                        <h4><i class="fas fa-bullseye"></i> Назначение:</h4>
+                        <p><b>70 мм:</b> квартиры, дома, где важен комфорт и эстетика.<br>
+                        <b>76 мм:</b> элитные квартиры, дома премиум-класса, зоны с холодным климатом.</p>
+                    </div>
+                  <a href="index.html#contacts" class="btn-consult">Сделать заказ</a>
+                </div>
+
+                <!-- 4. ТОПЛАЙН -->
+                <div class="profile-card">
+                    <h3>Topline (Топлайн)</h3>
+                    <span class="profile-segment" style="background: #f0f0f0; color: #555;">58 мм / 70 мм — Бюджет и Стандарт</span>
+                    
+                    <div class="pros-cons-block list-plus">
+                        <h4><i class="fas fa-plus-circle"></i> Плюсы:</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Доступная цена (хороший "эконом+").</li>
+                            <li><i class="fas fa-check"></i> Низкий теплопровод.</li>
+                            <li><i class="fas fa-check"></i> Высокая теплоизоляция.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-minus">
+                        <h4><i class="fas fa-minus-circle"></i> Минусы:</h4>
+                        <ul>
+                            <li><i class="fas fa-times"></i> Средняя шумоизоляция.</li>
+                            <li><i class="fas fa-times"></i> Простой функционал: только стандартные опции.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-purpose">
+                        <h4><i class="fas fa-bullseye"></i> Назначение:</h4>
+                        <p><b>58 мм:</b> балконы, лоджии, дачи, гаражи и технические помещения.<br>
+                        <b>70 мм:</b> съемные квартиры, дома для сезонного проживания, а также городские квартиры при ограниченном бюджете.</p>
+                    </div>
+                   <a href="index.html#contacts" class="btn-consult">Сделать заказ</a>
+                </div>
+
+                <!-- ================= ПЕРЕХОД (ДВЕРИ) ================= -->
+               <div class="section-divider" id="doors">
+                    <h2>Дверные системы</h2>
+                    <p>Входные и межкомнатные двери из ПВХ. Надежная защита от взлома, шума и холода. Подберем профиль под ваши задачи и бюджет.</p>
+                </div>
+
+                <!-- ================= ДВЕРНЫЕ ПРОФИЛИ ================= -->
+
+                <!-- 5. ГРЮНХАУС (ДВЕРИ) -->
+                <div class="profile-card">
+                    <h3>Greenhouse (Грюнхаус) — Двери</h3>
+                    <span class="profile-segment" style="background: #e8f4fc; color: #2980b9;">Входные и межкомнатные — Бюджет и Стандарт</span>
+                    
+                    <div class="pros-cons-block list-plus">
+                        <h4><i class="fas fa-plus-circle"></i> Плюсы:</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Отличный баланс цены и надежности.</li>
+                            <li><i class="fas fa-check"></i> Хорошая защита от сквозняков и уличного шума.</li>
+                            <li><i class="fas fa-check"></i> Усиленный металлический армирующий профиль (защита от провисания).</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-minus">
+                        <h4><i class="fas fa-minus-circle"></i> Минусы:</h4>
+                        <ul>
+                            <li><i class="fas fa-times"></i> Базовые серии не подходят для экстремально низких температур.</li>
+                            <li><i class="fas fa-times"></i> Требует качественной фурнитуры для взломостойкости.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-purpose">
+                        <h4><i class="fas fa-bullseye"></i> Назначение:</h4>
+                        <p><b>Входные:</b> квартиры, дома, дачи, офисы.<br>
+                        <b>Межкомнатные:</b> балконные блоки, зонирование пространства.</p>
+                    </div>
+                    <a href="index.html#contacts" class="btn-consult">Сделать заказ</a>
+                </div>
+
+                <!-- 6. ТОПЛАЙН (ДВЕРИ) -->
+                <div class="profile-card">
+                    <h3>Topline (Топлайн) — Двери</h3>
+                    <span class="profile-segment" style="background: #f0f0f0; color: #555;">Входные и межкомнатные — Бюджет</span>
+                    
+                    <div class="pros-cons-block list-plus">
+                        <h4><i class="fas fa-plus-circle"></i> Плюсы:</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Доступная цена (отличный выбор для дач и съемных квартир).</li>
+                            <li><i class="fas fa-check"></i> Легкая и плавная работа створки благодаря продуманной геометрии.</li>
+                            <li><i class="fas fa-check"></i> Быстрый срок изготовления.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-minus">
+                        <h4><i class="fas fa-minus-circle"></i> Минусы:</h4>
+                        <ul>
+                            <li><i class="fas fa-times"></i> Средняя шумоизоляция.</li>
+                            <li><i class="fas fa-times"></i> Простой функционал: только стандартные опции.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pros-cons-block list-purpose">
+                        <h4><i class="fas fa-bullseye"></i> Назначение:</h4>
+                        <p><b>Входные:</b> дачи, технические помещения, временные конструкции.<br>
+                        <b>Межкомнатные:</b> балконы, лоджии, перегородки.</p>
+                    </div>
+                    <a href="index.html#contacts" class="btn-consult">Сделать заказ</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ФУТЕР -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ООО «Альбали Стар». Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- СКРИПТ ДЛЯ БУРГЕР-МЕНЮ -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
